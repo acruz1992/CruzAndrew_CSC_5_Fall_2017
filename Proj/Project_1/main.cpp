@@ -22,10 +22,13 @@ int main(int argc, char** argv) {
     float housewager;
     float bets;
     char action;
+    int ctotal;
+    char ch;
     
     //Loop the Menu and Problems
     cout<<"How many games would you like to play?: ";
     cin>>choice;
+    cin.ignore();
     do{
         cout<<"Dealers hand: \n";
         int card1=(rand()%(14-2+1))+2;  //dealer card 1
@@ -44,6 +47,8 @@ int main(int argc, char** argv) {
                     default: cout<<card1;
                     break;
                 }
+            if(card1<=14&&card1>=12)
+                card1=10;
             cout<<" and ";
                 switch (card2)
                 {
@@ -58,6 +63,12 @@ int main(int argc, char** argv) {
                     default: cout<<card2;
                     break;
                 }
+                if(card2<=14&&card2>=12)
+                card2=10;
+                ctotal=card1+card2;
+                cout<<"\nTotal is "<<ctotal<<"\n";
+                cout<<"Press Enter to continue\n";
+                ch=cin.get();
                 cout<<endl;
                 
                        // if (action=='H'||action=='h')
