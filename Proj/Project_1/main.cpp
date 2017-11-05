@@ -18,13 +18,6 @@ using namespace std;    //Standard Name-space under which System Libraries resid
 int main(int argc, char** argv) {
 
     int choice;
-    srand(static_cast<unsigned int>(time(0)));
-    
-    //to deal values from 2-14
-    int card1=rand()%14+2;  //dealer card 1
-    int card2=rand()%14+2;  //dealer card 2
-    int card=rand()%14+2;  //dealer card 3 to hit if needed
-  
     float wager;
     float housewager;
     float bets;
@@ -34,50 +27,42 @@ int main(int argc, char** argv) {
     cout<<"How many games would you like to play?: ";
     cin>>choice;
     do{
-        
-        {
-           
-            
-                switch (card1)
+        cout<<"Dealers hand: \n";
+        int card1=(rand()%(14-2+1))+2;  //dealer card 1
+        int card2=(rand()%(14-2+1))+2;  //dealer card 2
+        int card=(rand()%(14-2+1))+2;  //dealer card 3 to hit if needed
+            switch (card1)
                 {
-                    case 11: cout<<"Ace ";
+                    case 11: cout<<"Ace";
                     break;
                     case 12: cout<<"Jack";
                     break;
-                    case 13: cout<<"Queen ";
+                    case 13: cout<<"Queen";
                     break;
-                    case 14: cout<<"King ";
+                    case 14: cout<<"King";
                     break;
                     default: cout<<card1;
                     break;
                 }
+            cout<<" and ";
                 switch (card2)
                 {
-                    case 11: cout<<"Ace ";
+                    case 11: cout<<"Ace";
                     break;
                     case 12: cout<<"Jack";
                     break;
-                    case 13: cout<<"Queen ";
+                    case 13: cout<<"Queen";
                     break;
-                    case 14: cout<<"King ";
+                    case 14: cout<<"King";
                     break;
                     default: cout<<card2;
                     break;
                 }
-                        
-                    }
-                    {
+                cout<<endl;
                 
-                
-                        if (action=='H'||action=='h')
-                        {
-
-                        }
-                    }
-                
-            
-        }  
-    }while(choice>=1)
+                       // if (action=='H'||action=='h')
+                    
+    }while(--choice>=1);
     
     return 0;
 }
