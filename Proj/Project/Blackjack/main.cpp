@@ -16,29 +16,31 @@ using namespace std;    //Standard Name-space under which System Libraries resid
     
 
 int main(int argc, char** argv) {
-
-    int choice;
-    float wager;
-    float housewager;
-    float bets;
-    char action;
-    int pctotal,dctotal;
-    char ch;
-    char hit;
-    string name;
+    int choice;                         //to chose how many games the user would like to play
+    float pctotal,dctotal;              //the total amount of value of he cards
+    char ch;                            //to have the user press enter between card draws
+    char hit;                           //to have the user draw a 3rd card
+    string name;                        //string to enter the users name
+    const int SIZE=20;
+    char fileOut[SIZE]="BlackjackOut.dat";
+    string fileIn="BlackjackIn.dat";
+    ofstream out;
+    ifstream in;
+    out.open(fileOut);
+    in.open(fileIn.c_str());
+    
     cout<<"\t\tBlackjack\n\n"<<endl;
     cout<<"welcome to blackjack. What is your first name? "<<endl;
     cin>>name;
     cout<<"How many games would you like to play?: ";
     cin>>choice;
-    cin.ignore();
+    cin.ignore();                       //had to place this to allow the program have different kinds of inputs
     cout<<endl;
-    do{                                                         //do while loop for the number of games to play
+    do{                                 //do while loop for the number of games to play
         {
         cout<<name<<"'s hand:"<<endl;
-        cout<<endl;
-        int pcard1=(rand()%(14-2+1))+2;  //dealer card 1
-        int pcard2=(rand()%(14-2+1))+2;  //dealer card 2
+        int pcard1=(rand()%(14-2+1))+2;  //random dealer card 1
+        int pcard2=(rand()%(14-2+1))+2;  //random dealer card 2
         
                 switch (pcard1)
                 {
@@ -67,20 +69,21 @@ int main(int argc, char** argv) {
                     default: cout<<pcard2;
                     break;
                 }
-                if(pcard1>=12)pcard1=10;
-                if(pcard2>=12)pcard2=10;
+                cout<<endl;
+                if(pcard1>=12)pcard1=10; //jack,queen,king have a 10 value
+                if(pcard2>=12)pcard2=10; //jack,queen,king have a 10 value
                 pctotal=pcard1+pcard2;
-                cout<<setw(10)<<"\nTotal is "<<pctotal<<endl;
-                if (pctotal<=20)
+                cout<<"\tTotal is "<<pctotal<<endl;
+                if (pctotal<=20)         //if the hand has a value of 20 or less the user can request a 3rd card
                 {
                     do
                     {
-                        cout<<"\n"<<name<<", would you like to hit again? Y/N: ";
+                        cout<<name<<", would you like to hit again? Y/N: ";
                         cin>>hit;
                         if (hit=='Y'||hit=='y')
                         {
                             int pcard=(rand()%(14-2+1))+2;  //player card 3 to hit if needed
-                            cout<<setw(10)<<"new card ";
+                            cout<<"\tNew card ";
                             switch (pcard)
                             {
                                 case 11: cout<<"Ace";
@@ -94,12 +97,13 @@ int main(int argc, char** argv) {
                                 default: cout<<pcard;
                                 break;
                             }
-                            if(pcard>=12)
-                                pcard=10;
-                            else if(pcard==11)
-                                pcard=1;
-                                pctotal+=pcard;
-                            cout<<setw(10)<<"\nNew total is "<<pctotal<<"\n"<<endl;
+                            if(pcard>=12){      //jack,queen,king have a 10 value
+                                pcard=10;}
+                            else if(pcard==11){ //Ace has a value of 1 at the third card
+                                pcard=1;}
+                            cout<<endl;
+                            pctotal+=pcard;     //add the third card value to the original
+                            cout<<"\tNew total is "<<pctotal<<"\n"<<endl;
                         }
                     }while ((!(hit=='n'||hit=='N'))||!pctotal>=21);
                 }
@@ -112,7 +116,6 @@ int main(int argc, char** argv) {
         cout<<"Dealers hand: "<<endl;
         int dcard1=(rand()%(14-2+1))+2;  //dealer card 1
         int dcard2=(rand()%(14-2+1))+2;  //dealer card 2
-        cout<<endl;
         switch (dcard1)
                 {
                     case 11: cout<<setw(10)<<"Ace";
@@ -140,14 +143,17 @@ int main(int argc, char** argv) {
                     default: cout<<dcard2;
                     break;
                 }
-                if(dcard1>=12)dcard1=10;
-                if(dcard2>=12)dcard2=10;
+                if(dcard1>=12){ //jack,queen,king have a 10 value
+                    dcard1=10;}
+                if(dcard2>=12){ //jack,queen,king have a 10 value
+                    dcard2=10;}
                 dctotal=dcard1+dcard2;
-                cout<<setw(10)<<"\nTotal is "<<dctotal<<endl;
+                cout<<endl;
+                cout<<"\tTotal is "<<dctotal<<endl;
                 if (dctotal<=12)
                         {
                             int dcard=(rand()%(14-2+1))+2;  //dealer card 3 to hit if needed
-                            cout<<setw(10)<<"new card ";
+                            cout<<"\tNew card ";
                             switch (dcard)
                             {
                                 case 11: cout<<"Ace";
@@ -161,26 +167,38 @@ int main(int argc, char** argv) {
                                 default: cout<<dcard;
                                 break;
                             }
-                            if(dcard>=12)
-                                dcard=10;
-                            else if(dcard==11)
-                                dcard=1;
-                                dctotal+=dcard;
-                            cout<<setw(10)<<"\nNew total is "<<dctotal<<"\n"<<endl;
+                            if(dcard>=12){      //jack,queen,king have a 10 value
+                                dcard=10;}
+                            else if(dcard==11){ //Ace has a value of 1 at the 3rd card
+                                dcard=1;}
+                            dctotal+=dcard;
+                            cout<<endl;
+                            cout<<"\tNew total is "<<dctotal<<endl;
                         }
         }
         cout<<endl;
-        if(dctotal>21&&pctotal>21)
+        
+        //possible outcomes of the points from under the 21 score to over the 21 score
+        {if(dctotal>21&&pctotal>21)
             cout<<"Both of you lost";
+        else if (dctotal<=21&&pctotal>21)
+            cout<<"Dealer wins"<<endl;
+        else if (dctotal>21&&pctotal<=21)
+            cout<<name<<" wins"<<endl;
         else if (dctotal<=21&&pctotal<=21&&pctotal==dctotal)
             cout<<"Its a Draw"<<endl;
         else if (dctotal<=21&&pctotal<=21&&pctotal>dctotal)
             cout<<name<<" wins"<<endl;
         else if (dctotal<=21&&pctotal<=21&&pctotal<dctotal)
             cout<<"Dealer wins"<<endl;
+        }
+        cout<<endl;
+        cout<<"Press enter to continue."<<endl;
+        cin.get(ch);
         
             
     }while(--choice>=1);
-    
+    out.close();
+    in.close();
     return 0;
 }
