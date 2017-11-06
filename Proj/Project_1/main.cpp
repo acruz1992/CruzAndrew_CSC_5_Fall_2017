@@ -32,23 +32,25 @@ int main(int argc, char** argv) {
     cout<<"How many games would you like to play?: ";
     cin>>choice;
     cin.ignore();
+    cout<<endl;
     do{                                                         //do while loop for the number of games to play
         {
         cout<<name<<"'s hand:"<<endl;
+        cout<<endl;
         int pcard1=(rand()%(14-2+1))+2;  //dealer card 1
         int pcard2=(rand()%(14-2+1))+2;  //dealer card 2
         
                 switch (pcard1)
                 {
-                    case 11: cout<<"Ace";
+                    case 11: cout<<setw(10)<<"Ace";
                     break;
-                    case 12: cout<<"Jack";
+                    case 12: cout<<setw(10)<<"Jack";
                     break;
-                    case 13: cout<<"Queen";
+                    case 13: cout<<setw(10)<<"Queen";
                     break;
-                    case 14: cout<<"King";
+                    case 14: cout<<setw(10)<<"King";
                     break;
-                    default: cout<<pcard1;
+                    default: cout<<setw(10)<<pcard1;
                     break;
                 }
                 cout<<" and ";
@@ -68,17 +70,17 @@ int main(int argc, char** argv) {
                 if(pcard1>=12)pcard1=10;
                 if(pcard2>=12)pcard2=10;
                 pctotal=pcard1+pcard2;
-                cout<<"\nTotal is "<<pctotal<<endl;
+                cout<<setw(10)<<"\nTotal is "<<pctotal<<endl;
                 if (pctotal<=20)
                 {
                     do
                     {
-                        cout<<name<<", would you like to hit again? Y/N: ";
+                        cout<<"\n"<<name<<", would you like to hit again? Y/N: ";
                         cin>>hit;
                         if (hit=='Y'||hit=='y')
                         {
                             int pcard=(rand()%(14-2+1))+2;  //player card 3 to hit if needed
-                            cout<<"new card ";
+                            cout<<setw(10)<<"new card ";
                             switch (pcard)
                             {
                                 case 11: cout<<"Ace";
@@ -97,7 +99,7 @@ int main(int argc, char** argv) {
                             else if(pcard==11)
                                 pcard=1;
                                 pctotal+=pcard;
-                            cout<<"\nNew total is "<<pctotal<<"\n"<<endl;
+                            cout<<setw(10)<<"\nNew total is "<<pctotal<<"\n"<<endl;
                         }
                     }while ((!(hit=='n'||hit=='N'))||!pctotal>=21);
                 }
@@ -113,15 +115,15 @@ int main(int argc, char** argv) {
         cout<<endl;
         switch (dcard1)
                 {
-                    case 11: cout<<"Ace";
+                    case 11: cout<<setw(10)<<"Ace";
                     break;
-                    case 12: cout<<"Jack";
+                    case 12: cout<<setw(10)<<"Jack";
                     break;
-                    case 13: cout<<"Queen";
+                    case 13: cout<<setw(10)<<"Queen";
                     break;
-                    case 14: cout<<"King";
+                    case 14: cout<<setw(10)<<"King";
                     break;
-                    default: cout<<dcard1;
+                    default: cout<<setw(10)<<dcard1;
                     break;
                 }
                 cout<<" and ";
@@ -141,11 +143,11 @@ int main(int argc, char** argv) {
                 if(dcard1>=12)dcard1=10;
                 if(dcard2>=12)dcard2=10;
                 dctotal=dcard1+dcard2;
-                cout<<"\nTotal is "<<dctotal<<endl;
+                cout<<setw(10)<<"\nTotal is "<<dctotal<<endl;
                 if (dctotal<=12)
                         {
                             int dcard=(rand()%(14-2+1))+2;  //dealer card 3 to hit if needed
-                            cout<<"new card ";
+                            cout<<setw(10)<<"new card ";
                             switch (dcard)
                             {
                                 case 11: cout<<"Ace";
@@ -164,13 +166,20 @@ int main(int argc, char** argv) {
                             else if(dcard==11)
                                 dcard=1;
                                 dctotal+=dcard;
-                            cout<<"\nNew total is "<<dctotal<<"\n"<<endl;
+                            cout<<setw(10)<<"\nNew total is "<<dctotal<<"\n"<<endl;
                         }
         }
-        if(dctotal>21)
-        cout<<"Dealer Lost\n"<<endl;
-        if(pctotal>21)
-        cout<<"\nYou loose!"<<endl;
+        cout<<endl;
+        if(dctotal>21&&pctotal>21)
+            cout<<"Both of you lost";
+        else if (dctotal<=21&&pctotal<=21&&pctotal==dctotal)
+            cout<<"Its a Draw"<<endl;
+        else if (dctotal<=21&&pctotal<=21&&pctotal>dctotal)
+            cout<<name<<" wins"<<endl;
+        else if (dctotal<=21&&pctotal<=21&&pctotal<dctotal)
+            cout<<"Dealer wins"<<endl;
+        
+            
     }while(--choice>=1);
     
     return 0;
