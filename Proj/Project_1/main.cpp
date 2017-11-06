@@ -22,7 +22,7 @@ int main(int argc, char** argv) {
     float housewager;
     float bets;
     char action;
-    int ctotal;
+    int pctotal,dctotal;
     char ch;
     char hit;
     
@@ -31,82 +31,143 @@ int main(int argc, char** argv) {
     cin>>choice;
     cin.ignore();
     do{
-        cout<<"Dealers hand:"<<endl;
-        int card1=(rand()%(14-2+1))+2;  //dealer card 1
-        int card2=(rand()%(14-2+1))+2;  //dealer card 2
-        int card=(rand()%(14-2+1))+2;  //dealer card 3 to hit if needed
-            switch (card1)
-                {
-                    case 11: cout<<"Ace";
-                    break;
-                    case 12: cout<<"Jack";
-                    break;
-                    case 13: cout<<"Queen";
-                    break;
-                    case 14: cout<<"King";
-                    break;
-                    default: cout<<card1;
-                    break;
-                }
-            cout<<" and ";
-                switch (card2)
-                {
-                    case 11: cout<<"Ace";
-                    break;
-                    case 12: cout<<"Jack";
-                    break;
-                    case 13: cout<<"Queen";
-                    break;
-                    case 14: cout<<"King";
-                    break;
-                    default: cout<<card2;
-                    break;
-                }
-                if(card1<=14&&card1>=12)
-                    card1=10;
-                if(card2<=14&&card2>=12)
-                card2=10;
+        {
+        cout<<"Dealers hand: "<<endl;
+        int dcard1=(rand()%(14-2+1))+2;  //dealer card 1
+        int dcard2=(rand()%(14-2+1))+2;  //dealer card 2
                 
-                ctotal=card1+card2;
-                cout<<"\nTotal is "<<ctotal<<endl;
-                if (ctotal<=20)
+        
+        switch (dcard1)
                 {
-                    cout<<"\nWould you like to hit again? Y/N: ";
-                    cin>>hit;
-                    if (hit=='Y'||hit=='y')
-                    {
-                        cout<<card1<<" and "<<card2<<" and ";
-                        switch (card)
+                    case 11: cout<<"Ace";
+                    break;
+                    case 12: cout<<"Jack";
+                    break;
+                    case 13: cout<<"Queen";
+                    break;
+                    case 14: cout<<"King";
+                    break;
+                    default: cout<<dcard1;
+                    break;
+                }
+                cout<<" and ";
+                switch (dcard2)
+                {
+                    case 11: cout<<"Ace";
+                    break;
+                    case 12: cout<<"Jack";
+                    break;
+                    case 13: cout<<"Queen";
+                    break;
+                    case 14: cout<<"King";
+                    break;
+                    default: cout<<dcard2;
+                    break;
+                }
+                if(dcard1>=12)dcard1=10;
+                if(dcard2>=12)dcard2=10;
+                dctotal=dcard1+dcard2;
+                cout<<"\nTotal is "<<dctotal<<endl;
+                if (dctotal<=12)
                         {
-                            case 11: cout<<"Ace";
-                            break;
-                            case 12: cout<<"Jack";
-                            break;
-                            case 13: cout<<"Queen";
-                            break;
-                            case 14: cout<<"King";
-                            break;
-                            default: cout<<card;
-                            break;
-                        }
-                        if(card<=14&&card>=12)
-                        card=10;
-                        else if(card==11)
-                        card=1;
-                        ctotal+=card;
-                        cout<<"\nNew total is "<<ctotal<<"\n"<<endl;
-                        if(ctotal>21)
+                            int dcard=(rand()%(14-2+1))+2;  //dealer card 3 to hit if needed
+                            cout<<"new card ";
+                            switch (dcard)
                             {
-                            cout<<"\nYou loose!\n";
-                            cout<<endl;
+                                case 11: cout<<"Ace";
+                                break;
+                                case 12: cout<<"Jack";
+                                break;
+                                case 13: cout<<"Queen";
+                                break;
+                                case 14: cout<<"King";
+                                break;
+                                default: cout<<dcard;
+                                break;
                             }
-                    }
-                    else if(hit=='N'||hit=='n');
-                }
-    
+                            if(dcard>=12)
+                                dcard=10;
+                            else if(dcard==11)
+                                dcard=1;
+                                dctotal+=dcard;
+                            cout<<"\nNew total is "<<dctotal<<"\n"<<endl;
+                        }
+                        if(dctotal>21)
+                        cout<<"Dealer Lost\n"<<endl;
+        
+        }
+        {
+        cout<<"Players hand:"<<endl;
+        int pcard1=(rand()%(14-2+1))+2;  //dealer card 1
+        int pcard2=(rand()%(14-2+1))+2;  //dealer card 2
                 
-                       // if (action=='H'||action=='h')
-                    
+        
+        switch (pcard1)
+                {
+                    case 11: cout<<"Ace";
+                    break;
+                    case 12: cout<<"Jack";
+                    break;
+                    case 13: cout<<"Queen";
+                    break;
+                    case 14: cout<<"King";
+                    break;
+                    default: cout<<pcard1;
+                    break;
+                }
+                cout<<" and ";
+                switch (pcard2)
+                {
+                    case 11: cout<<"Ace";
+                    break;
+                    case 12: cout<<"Jack";
+                    break;
+                    case 13: cout<<"Queen";
+                    break;
+                    case 14: cout<<"King";
+                    break;
+                    default: cout<<pcard2;
+                    break;
+                }
+                if(pcard1>=12)pcard1=10;
+                if(pcard2>=12)pcard2=10;
+                pctotal=pcard1+pcard2;
+                cout<<"\nTotal is "<<pctotal<<endl;
+                if (pctotal<=20)
+                {
+                    do
+                    {
+                        cout<<"\nWould you like to hit again? Y/N: ";
+                        cin>>hit;
+                        if (hit=='Y'||hit=='y')
+                        {
+                            int pcard=(rand()%(14-2+1))+2;  //dealer card 3 to hit if needed
+                            cout<<"new card ";
+                            switch (pcard)
+                            {
+                                case 11: cout<<"Ace";
+                                break;
+                                case 12: cout<<"Jack";
+                                break;
+                                case 13: cout<<"Queen";
+                                break;
+                                case 14: cout<<"King";
+                                break;
+                                default: cout<<pcard;
+                                break;
+                            }
+                            if(pcard>=12)
+                                pcard=10;
+                            else if(pcard==11)
+                                pcard=1;
+                                pctotal+=pcard;
+                            cout<<"\nNew total is "<<pctotal<<"\n"<<endl;
+                        }
+                    }while ((!(hit=='n'||hit=='N'))||!pctotal>=21);
+                }
+                if(pctotal>21)
+                cout<<"\nYou loose!"<<endl;
+        }
     }while(--choice>=1);
     
     return 0;
